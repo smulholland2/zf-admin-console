@@ -1,0 +1,107 @@
+<?= $this->doctype() ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?= $this->headTitle('TAP Series Admin')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?= $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Styles -->
+        <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
+            ->prependStylesheet($this->basePath('css/style.css'))
+            ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+            ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+            ->prependStylesheet('https://fonts.googleapis.com/css?family=Roboto:300')
+        ?>
+
+        <!-- Scripts -->
+        <?= $this->headScript()
+            ->prependFile($this->basePath('js/page-loader.js'))
+            ->prependFile($this->basePath('js/bootstrap.min.js'))
+            ->prependFile($this->basePath('js/jquery-3.1.0.min.js'))            
+        ?>
+    </head>
+    <body>
+        <div class="container-fluid main-container">
+            <!--<img src="<?= print "";//$this->basePath('img/zf-logo-mark.svg') ?>" height="28" alt="TAP Series Framework <?= \Application\Module::VERSION ?>"/>&nbsp;TAP Admin-->
+            <div id="MainMenu" class="col-sm-2 main-menu">
+                <div class="list-group panel">
+                    <!-- Home -->
+                    <a href="/" class="list-group-item list-group-item" data-parent="#MainMenu">Home</a>
+                    <!-- /Home -->
+                    <!-- Account Manager Menu -->
+                    <a href="#account-manager" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#MainMenu">Account Manager</a>
+                    <div class="collapse" id="account-manager">
+                        <a href="#add-account" class="list-group-item" data-toggle="collapse" data-parent="#account-manager">Add Account<i class="fa fa-caret-down"></i></a>
+                        <a href="#edit-account" class="list-group-item" data-toggle="collapse" data-parent="#account-manager">Review/Edit Account Information<i class="fa fa-caret-down"></i></a>
+                        <a href="/account-manager/edit-licenses" class="list-group-item" data-parent="#account-manager">Edit Licenses<i class="fa fa-caret-down"></i></a>
+                        <a href="#edit-courses" class="list-group-item" data-toggle="collapse" data-parent="#account-manager">Edit Custom Courses<i class="fa fa-caret-down"></i></a>                        
+                        <div class="collapse list-group-submenu" id="edit-courses">
+                            <a href="#" class="list-group-item" data-parent="#SubMenu1">Sub item 1</a>
+                            <a href="#" class="list-group-item" data-parent="#SubMenu1">Sub item 2</a>
+                            <a href="#" class="list-group-item" data-parent="#SubMenu1">Sub item 3</a>
+                            <a href="#" class="list-group-item" data-parent="#SubMenu1">Sub item 4</a>
+                            <a href="#SubSubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubSubMenu1">Sub item 5<i class="fa fa-caret-down"></i></a>
+                            <div class="collapse list-group-submenu list-group-submenu-1" id="SubSubMenu1">
+                                <a href="#" class="list-group-item" data-parent="#SubSubMenu1">Sub sub item 1</a>
+                                <a href="#" class="list-group-item" data-parent="#SubSubMenu1">Sub sub item 2</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Student Manager Menu -->
+                    <a href="#student-manager" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#MainMenu">Student Manager</a>
+                    <div class="collapse" id="student-manager">
+                        <a href="/student-manager/edit-student" class="list-group-item" data-parent="#student-manager">Edit Student Information<i class="fa fa-caret-down"></i></a>                     
+                    </div>
+                    <!-- Corporate Manager Menu -->
+                    <a href="#corporate-manager" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#MainMenu">Corporate Manager</a>
+                    <div class="collapse" id="corporate-manager">
+                        <a href="#add-account" class="list-group-item" data-toggle="collapse" data-parent="#corporate-manager">Add Account<i class="fa fa-caret-down"></i></a>
+                        <a href="#edit-account" class="list-group-item" data-toggle="collapse" data-parent="#corporate-manager">Review/Edit Account Information<i class="fa fa-caret-down"></i></a>
+                        <a href="/corporate-manager/edit-licenses" class="list-group-item" data-parent="#corporate-manager">Edit Licenses<i class="fa fa-caret-down"></i></a>
+                        <a href="#edit-courses" class="list-group-item" data-toggle="collapse" data-parent="#corporate-manager">Edit Custom Courses<i class="fa fa-caret-down"></i></a>                        
+                        <div class="collapse list-group-submenu" id="edit-courses">
+                            <a href="#" class="list-group-item" data-parent="#SubMenu1">Sub item 1</a>
+                            <a href="#" class="list-group-item" data-parent="#SubMenu1">Sub item 2</a>
+                            <a href="#" class="list-group-item" data-parent="#SubMenu1">Sub item 3</a>
+                            <a href="#" class="list-group-item" data-parent="#SubMenu1">Sub item 4</a>
+                            <a href="#SubSubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubSubMenu1">Sub item 5<i class="fa fa-caret-down"></i></a>
+                            <div class="collapse list-group-submenu list-group-submenu-1" id="SubSubMenu1">
+                                <a href="#" class="list-group-item" data-parent="#SubSubMenu1">Sub sub item 1</a>
+                                <a href="#" class="list-group-item" data-parent="#SubSubMenu1">Sub sub item 2</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Corporate Manager Menu -->
+                    <!-- Accounting Menu -->
+                    <a href="#accounting-manager" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#MainMenu">Accounting</a>
+                    <div class="collapse" id="accounting-manager">
+                        <a href="/accounting/invoiced-customers" class="list-group-item" data-parent="#accounting-manager">Invoiced Customers<i class="fa fa-caret-down"></i></a>                        
+                    </div>
+                    <!-- /Accounting Menu -->
+                    <!-- Blog Menu -->
+                    <a href="#blog-manager" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#MainMenu">Blog Manager</a>
+                    <div class="collapse" id="blog-manager">
+                        <a href="/posts/add" class="list-group-item" data-parent="#blog-manager">Add Blog<i class="fa fa-caret-down"></i></a>
+                        <a href="/posts/admin" class="list-group-item" data-parent="#blog-manager">Review/Edit Blogs<i class="fa fa-caret-down"></i></a>
+                    </div>
+                    <!-- /Blog Menu -->
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <?= $this->content ?>
+                <hr>
+                <footer>
+                    <p>&copy; 1999 - <?= date('Y') ?> by TAP Series LLC. All rights reserved.</p>
+                </footer>
+            </div>
+        </div>
+        <?= $this->inlineScript() ?>
+    </body>
+</html>
+
+

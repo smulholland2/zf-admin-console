@@ -1,0 +1,55 @@
+<?php
+$this->headTitle('TAP Admin | Blog List');
+
+$this->mainMenu()->setActiveItemId('home');
+
+$this->pageBreadcrumbs()->setItems([
+            'Home'=>$this->url('home')
+            ]);
+?>
+
+<h1>Blog Manager<small> - All Posts</small></h1>
+<hr>
+<p>
+    To view and edit a blog post click the title.
+</p>
+<div class="row">
+    
+    <div class="col-md-12">
+
+    <?php foreach($posts as $post): ?>
+    <div class="post-container">
+    <h3>
+        <a href="<?= $this->url('posts', ['action'=>'edit', 'id'=>$post->getId()]); ?>">
+            <?= $this->escapeHtml($post->getTitle()); ?>
+        </a>    
+    </h3>
+    
+    <p>
+        Published: <?= $this->escapeHtml(date('jS \of F Y', strtotime($post->getDateCreated()))); ?> 
+        | Tags: <?= $this->escapeHtml($postManager->convertTagsToString($post)); ?>   
+    </p>    
+        
+
+    <p class="content-caption">    
+        <?= $this->escapeHtml($post->getContent()); ?>
+    </p>
+
+    <p>
+        <a class="btn btn-danger" href="<?= $this->url('posts', ['action'=>'edit', 'id'=>$post->getId()]); ?>">
+            Delete
+        </a>
+    </p>
+
+    </div>
+    <?php endforeach; ?>
+
+    <?= $this->paginationControl($posts,
+                    'Sliding',
+                    'blog/partial/paginator', 
+                    array('route' => 'application')); ?>
+    
+    </div>
+</div>
+
+

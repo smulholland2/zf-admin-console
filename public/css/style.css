@@ -1,0 +1,76 @@
+html {
+  height:100%;
+}
+body {
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+  height: 100%;
+  color: #fee;
+  font-family: 'Roboto', sans-serif;
+  overflow:hidden;
+}
+.main-container {
+  height:100%;
+  padding-left: 0;
+  padding-right: 0;    
+}
+.main-menu {
+  height:100%;
+  background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
+  background-blend-mode: multiply;
+  color:white;
+  padding-left: 0;
+  padding-right: 0;    
+}
+.list-group {
+  background:none;
+  box-shadow:2px 0px 25px 1px rgba(41, 50, 60, 1);
+  height:100%;
+  margin:0;
+}
+.list-group.panel > .list-group-item {
+  background:none;
+  border-color:#333;
+  color:#fff;
+  border-radius: 0px !important;
+}
+.list-group-item {
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+  border:none !important;
+  border-radius: 0px !important;
+  color:#fff !important;  
+}
+.list-group.panel > .list-group-item:hover {
+  background: #485563;
+  color:#fff !important;
+}
+.list-group-submenu {
+  margin-left:20px;
+}
+.list-group-submenu > .list-group-item {  
+  border-radius: 0px !important;
+}
+h1 small {
+  color:#66Aefa !important;
+}
+.btn, select, input, button, .form-control {
+  border-radius:0px;
+}
+
+.table th {
+    background:#ddd;
+    color:#485563;
+}
+
+/** BLOG STYLES **/
+.post-container {
+    padding:10px;
+}
+.post-table tbody tr td {
+  border: none !important;
+}
+.post-table tbody tr:nth-of-type(2) td {
+    background: rgba(0,0,0,0.1);
+}
+.post-title {
+  color:#66Aefa;
+}

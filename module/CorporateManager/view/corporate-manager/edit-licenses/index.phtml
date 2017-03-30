@@ -1,0 +1,309 @@
+<style>
+    #lookup{
+        height:100%;
+        padding-top:10px;
+        padding-bottom:10px;
+    }
+    /*.table-wrapper{
+        max-height:100px;
+    }*/
+    table ,tr td{
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+    }
+    tbody {
+        display:block;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+    thead, tbody tr {
+        display:table;
+        width:100%;
+        table-layout:fixed;/* even columns width , fix width of table too*/
+    }
+    /*thead {
+        width: calc( 100% - 1em )
+    }*/
+    table {
+        width:400px;
+    }
+    #accounts {
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+    }
+    #account{
+        border-left:2px solid #ddd;
+        height:100%;
+        padding-top:10px;
+        padding-bottom:10px;
+    }
+    .table th {
+        background:#ddd;
+        color:#485563;
+    }
+    td.account-opt {
+        width: 25px;
+        border-right: none;
+        border-left: none;
+    }
+    td.account-name {
+        width:20%;
+        border-left: none;
+    }
+    td.company-name {
+        width:35%;
+    }
+    td.contact-name {
+        width:40%;
+        border-right: none;
+    }
+</style>
+<div class="page-header">
+<h1>Corporate Manager<small> - Edit Licenses</small></h1>
+</div>
+<div class='col-sm-6' id="lookup">
+<input type="text" id="filter" class="form-control" placeholder="Search for accounts..">
+<br /><br />
+<div class="table-wrapper">
+    <table id="accounts" class="table table-stripped table-condensed">
+        <thead>
+            <tr>
+                <th></th>
+                <th style="width:20%;">Account</th>
+                <th style="width:35%;">Company</th>
+                <th style="width:40%;">Contact</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+<p class="table-msg">Begin typing to search through accounts.</p>
+<button class="btn btn-default" id="select-account">Use this account</button>
+</div>
+<div class='col-sm-6' id="account">
+<div class="form-group">
+<select name="productid" size="11" class="form-control" id="course-list">
+    <option value="178">Alcohol Training</option>
+    <option value="166">Allergen Awareness</option>
+    <option value="167">Allergen Plan Development</option>
+    <option value="168">Allergen Plan Specialist</option>
+    <option value="183">Anchorage, AK Food Handler</option>
+    <option value="163">Arizona Food Handler Training</option>
+    <option value="77">Barbour County, WV Food Handler</option>
+    <option value="83">Cabell-Huntington County, WV Food Handler</option>
+    <option value="16">California Food Handler Training</option>
+    <option value="4">Cooking Basics</option>
+    <option value="1">Earn More With Service</option>
+    <option value="75">Florida Food Worker Training Program</option>
+    <option value="3">Food Handler Training (all other states)</option>
+    <option value="2">Food Safety Manager Certification Training</option>
+    <option value="14">Food Safety Re-Certification Training</option>
+    <option value="165">Food Safety Refresher Training</option>
+    <option value="6">HACCP Managers Certificate Course</option>
+    <option value="19">Idaho Food Handler Training</option>
+    <option value="162">Illinois Food Handler Training</option>
+    <option value="164">Jackson County MO Food Handler Training</option>
+    <option value="157">Mid-Ohio Valley Health Department West Virginia Food Worker's Permit</option>
+    <option value="181">Minnesota Food Safety Renewal Training</option>
+    <option value="185">Municipality of Anchorange Food Handler</option>
+    <option value="18">New Mexico Food Handler Training</option>
+    <option value="74">Norfolk VA Food Handler Training</option>
+    <option value="179">Ohio Level 2 Foodservice Food Safety Manager Certification Training</option>
+    <option value="182">Ohio Level 2 Retail Food Safety Manager Certification Training</option>
+    <option value="24">Ohio Level One Certification</option>
+    <option value="114">Pendleton County, WV Food Handler</option>
+    <option value="115">Pocahontas County, WV Food Handler</option>
+    <option value="119">Randolph County, WV Food Handler</option>
+    <option value="169">Retail Food Safety Manager Certification Training</option>
+    <option value="180">Rhode Island Food Safety Re-Certification Training</option>
+    <option value="5">Strategies for Increasing Sales</option>
+    <option value="21">Texas Food Handler Training</option>
+    <option value="79">Tulsa Food Handler</option>
+    <option value="123">Upshur County, WV Food Handler</option>
+    <option value="80">Utah Food Handler Training</option>
+    <option value="124">Wayne County, WV Food Handler</option>
+    <option value="113">Wheeling-Ohio County, WV Food Handler</option>
+    <option value="76">Wichita Food Handler</option>
+    <option value="171">Wisconsin Re-Certification Training</option>
+</select>
+</div>
+<div class="form-group">
+    <div class="checkbox">
+    <label><input id="account-status" type="checkbox" value="" name="account-status" checked>Active Account</label>
+    </div>
+</div>
+<div class="form-group">
+    <label for="account-type">Account Type:</label>
+<select id="account-type" class="form-control">
+    <option value="0">Per-Use</option>
+    <option value="-1">Contract</option>
+    <option value="-3">Voucher / License Key</option>
+</select>
+</div>
+<div class="form-group">
+<label for="total-licenses">Total Licenses:</label>
+<input type="number" id="total-licenses" class="form-control" placeholder="Select a course to see the total licenses.." min="0" max="9999">
+<div class="clearfix"></div>
+<br />
+<div id="not-set" class="alert alert-info alert-dismissible hidden" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    This account has not been setup to use this course. Set the Account Type and add licenses to the Total Licenses box above.
+</div>
+<div class="clearfix"></div>
+<div id="update-ok" class="alert alert-info alert-dismissible hidden" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    Successfully updated the account for the course <span id='updated-course'></span>.
+</div>
+</div>
+<div class="form-group">
+<button class="btn btn-default" id="submit">Submit</button>
+</div>
+</div>
+<div class="clearfix"></div>
+<script>
+$('#account').hide();
+
+$('#filter').keyup(function(e){
+    var data = $(this).val();
+    if(data.length > 3)
+    {
+        $.ajax({
+            type: 'post',
+            url: '/corporate-manager/edit-licenses/list',
+            data: {'filter': data},
+            dataType: 'json',
+            success: function(response)
+            {
+                loadAccountTable(response);
+            }
+        });
+    }
+    
+});
+
+$('#select-account').click(function(e)
+{
+    var radioButtons = $("#accounts input:radio[name='account']");
+    var selectedIndex = radioButtons.index(radioButtons.filter(':checked'));
+    if(selectedIndex > -1)
+        $('#account').fadeIn();
+    else
+        alert("Please select an account from the list.");
+});
+$('#course-list').change(function()
+{
+    var course = $("#course-list").val();
+    var radioButtons = $("#accounts input:radio[name='account']");
+    var account = radioButtons.filter(':checked').val();
+
+    $('#not-set').addClass('hidden');
+    $('#update-ok').addClass('hidden');
+    $('#updated-course').html($('#course-list option:selected' ).text());
+
+    if(course != null && account != null)
+    {
+        var data = {'course' : course, 'account': account};
+        //Update the total amount of licenses displayed in the input.
+        $.ajax({
+            type: 'post',
+            url: '/corporate-manager/edit-licenses/totalLicenses',
+            data: data,
+            dataType: 'json',
+            success: function(response)
+            {
+                if(response != null)
+                {
+                    if(response.LicensesRemaining == -1)
+                        $('#account-status').prop('checked', false);
+                    else if(response.LicensesRemaining == -2)
+                    {
+                        $('#account-status').prop('checked', true);
+                        var course = $("#account-type").val(-2);
+                    }
+                    else if(response.LicensesRemaining == -3)
+                    {
+                        $('#account-status').prop('checked', true);
+                        var course = $("#account-type").val(-3);
+                    }
+                    else
+                    {
+                        $('#account-status').prop('checked', true);
+                        $("#account-type").val(0);
+                        $('#total-licenses').val(response.LicensesRemaining);
+                    }                        
+                }
+                else
+                    $('#not-set').removeClass('hidden');
+            },
+            failure: function()
+            {
+                console.log("Error");
+            }
+        });
+    }
+    else if(account == null)
+        alert("Please select an account from the list.");
+    else
+        alert('Please select a course from the list below.');
+});
+$('#total-licenses').keyup(function(e){
+    e.preventDefault();
+    if($(this).val() > 999)
+        $(this).val(999);
+});
+$('#submit').click(function()
+{    
+    var course = $("#course-list").val();
+    var licenses = $('#total-licenses').val();
+    var radioButtons = $("#accounts input:radio[name='account']");
+    var account = radioButtons.filter(':checked').val();
+    var status = $('#account-status').prop('checked');
+
+    var type = status == 'true' ? $('#account-type').val() : -2;
+
+
+    console.log(type);
+    if(course != null && licenses != '' && licenses > -1 && account != null)
+    {        
+        data = {'course' : course, 'account': account, 'licenses': licenses, 'type': type};
+        //Update the total amount of licenses stored in the db.
+        $.ajax({
+            type: 'post',
+            url: '/corporate-manager/edit-licenses/updateLicenses',
+            data: data,
+            success: function(response)
+            {
+                $('#not-set').addClass('hidden');
+                $('#update-ok').removeClass('hidden');
+            }
+        });
+    }
+    else if(licenses == null || licenses < 0)
+        alert('Please enter a number greater than -1.');
+    else if(account == null)
+        alert("Please select an account from the list.");
+    else
+        alert('Please select a course from the list below.');
+    
+});
+
+function loadAccountTable(data)
+{
+    $('#accounts tbody').html('');
+    if(data.length == 0)
+        $('.table-msg').html('No accounts found matching your criteria.');
+    else
+        $('.table-msg').html('');
+    
+    $(data).each(function(){
+        var $row = $('<tr></tr>');//<td></td>
+        $row.append('<td class="account-opt"><input type="radio" name="account" value="'+this.AccountName+'" class="account-option"/></td>');
+        $row.append('<td class="account-name">'+this.AccountName+'</td>');
+        $row.append('<td class="company-name">'+this.CompanyName+'</td>');
+        $row.append('<td class="contact-name">'+this.ContactName+'</td>');
+        $('#accounts tbody').append($row);
+    });
+}
+</script>

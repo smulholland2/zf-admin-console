@@ -1,0 +1,25 @@
+<?php
+$this->headTitle('View Post - ' . $post->getTitle());
+        
+$form = $this->form;
+
+$form->prepare();        
+?>
+
+<a href="
+    <?= $this->url('posts', ['action'=>'admin']); ?>">
+    &lt;&lt; Back to list of posts
+</a>
+
+<h1>
+    <?= $this->escapeHtml($post->getTitle()); ?>    
+</h1>
+
+<p>
+    Published: <?= $this->escapeHtml(date('jS \of F Y', strtotime($post->getDateCreated()))); ?> 
+    | Tags: <?= $this->escapeHtml($postManager->convertTagsToString($post)); ?>   
+</p>
+
+<p>    
+    <?= $post->getContent(); ?>
+</p>

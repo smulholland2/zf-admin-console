@@ -1,0 +1,289 @@
+<?php
+$this->headTitle('Edit Student');
+
+/*$this->mainMenu()->setActiveItemId('home');
+
+$this->pageBreadcrumbs()->setItems([
+            'Home'=>$this->url('home'),
+            'Edit Post'=>$this->url('posts', ['action'=>'edit'])
+            ]);*/
+
+$form = $this->form;
+
+$form->get('username')->setAttributes([
+    'class'=>'form-control'
+    ]);
+
+$form->get('password')->setAttributes([
+    'class'=>'form-control'
+    ]);
+
+$form->get('account-name')->setAttributes([
+    'class'=>'form-control'
+    ]);
+
+$form->get('first-name')->setAttributes([
+    'class'=>'form-control'   
+    ]);
+
+$form->get('last-name')->setAttributes([
+    'class'=>'form-control'   
+    ]);
+
+$form->get('language')->setAttributes([
+    'class'=>'form-control'   
+    ]);
+
+$form->get('email')->setAttributes([
+    'class'=>'form-control'   
+    ]);
+
+$form->get('added-date')->setAttributes([
+    'class'=>'form-control'   
+    ]);
+
+$form->get('start-date')->setAttributes([
+    'class'=>'form-control'   
+    ]);
+
+$form->get('end-date')->setAttributes([
+    'class'=>'form-control'   
+    ]);
+
+$form->get('version')->setAttributes([
+    'class'=>'form-control'   
+    ]);
+
+/*$form->get('training-done')->setAttributes([
+    'class'=>'form-control'   
+    ]);*/
+
+$form->get('expiration-date')->setAttributes([
+    'class'=>'form-control'   
+    ]);
+
+$form->get('question-group')->setAttributes([
+    'class'=>'form-control'   
+    ]);
+
+$form->get('jurisdiction')->setAttributes([
+    'class'=>'form-control'   
+    ]);
+
+$form->get('gender')->setAttributes([
+    'class'=>'form-control'   
+    ]);
+
+$form->get('store-number')->setAttributes([
+    'class'=>'form-control'   
+    ]);
+
+$form->get('submit')->setAttributes(['class'=>'btn btn-primary']);
+$form->get('submit')->setValue('Save');
+$form->prepare();
+
+?>
+
+<div class="page-header">
+    <h1>Student Manager<small> - Edit Student Profile</small></h1>
+</div>
+
+<p>
+    Please fill out the following form and click the *Save* button.
+</p>
+<div class="clearfix"></div>
+<div class="alert alert-succes alert-dismissible student-updated-success" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Success!</strong> The student's information has been updated.
+</div>
+<div class="clearfix"></div>
+
+<?= $this->form()->openTag($form); ?>
+
+    <div class="col-sm-4">
+        
+        <div class="form-group">
+            <?= $this->formLabel($form->get('username')); ?>
+            <?= $this->formElement($form->get('username')); ?>
+            <?= $this->formElementErrors($form->get('username')); ?>
+        </div>
+        
+        <div class="form-group">
+            <?= $this->formLabel($form->get('password')); ?>
+            <?= $this->formElement($form->get('password')); ?>
+            <?= $this->formElementErrors($form->get('password')); ?>
+        </div>
+        
+        <div class="form-group">
+            <?= $this->formLabel($form->get('account-name')); ?>
+            <?= $this->formElement($form->get('account-name')); ?>
+            <?= $this->formElementErrors($form->get('account-name')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('first-name')); ?>
+            <?= $this->formElement($form->get('first-name')); ?>
+            <?= $this->formElementErrors($form->get('first-name')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('last-name')); ?>
+            <?= $this->formElement($form->get('last-name')); ?>
+            <?= $this->formElementErrors($form->get('last-name')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('language')); ?>
+            <?= $this->formElement($form->get('language')); ?>
+            <?= $this->formElementErrors($form->get('language')); ?>                  
+        </div>
+
+    </div>
+
+    <div class="col-sm-4">        
+        
+        <div class="form-group">
+            <?= $this->formLabel($form->get('email')); ?>
+            <?= $this->formElement($form->get('email')); ?>
+            <?= $this->formElementErrors($form->get('email')); ?>                  
+        </div>
+        
+        <div class="form-group">
+            <?= $this->formLabel($form->get('added-date')); ?>
+            <?= $this->formElement($form->get('added-date')); ?>
+            <?= $this->formElementErrors($form->get('added-date')); ?>                  
+        </div>
+        
+        <div class="form-group">
+            <?= $this->formLabel($form->get('start-date')); ?>
+            <?= $this->formElement($form->get('start-date')); ?>
+            <?= $this->formElementErrors($form->get('start-date')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('end-date')); ?>
+            <?= $this->formElement($form->get('end-date')); ?>
+            <?= $this->formElementErrors($form->get('end-date')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('version')); ?>
+            <?= $this->formElement($form->get('version')); ?>
+            <?= $this->formElementErrors($form->get('version')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('end-date')); ?>
+            <?= $this->formElement($form->get('end-date')); ?>
+            <?= $this->formElementErrors($form->get('end-date')); ?>
+        </div>
+
+    </div>
+
+    <div class="col-sm-4">
+        
+        <div class="form-group">
+            <?= $this->formLabel($form->get('expiration-date')); ?>
+            <?= $this->formElement($form->get('expiration-date')); ?>
+            <?= $this->formElementErrors($form->get('expiration-date')); ?>
+        </div>
+        
+        <div class="form-group">
+            <?= $this->formLabel($form->get('question-group')); ?>
+            <?= $this->formElement($form->get('question-group')); ?>
+            <?= $this->formElementErrors($form->get('question-group')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('jurisdiction')); ?>
+            <?= $this->formElement($form->get('jurisdiction')); ?>
+            <?= $this->formElementErrors($form->get('jurisdiction')); ?>                  
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('gender')); ?>
+            <?= $this->formElement($form->get('gender')); ?>
+            <?= $this->formElementErrors($form->get('gender')); ?>                  
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('store-number')); ?>
+            <?= $this->formElement($form->get('store-number')); ?>
+            <?= $this->formElementErrors($form->get('store-number')); ?>                  
+        </div>
+
+        <div class="form-group">
+            <!-- Training Done -->
+        </div>
+
+        <?= $this->formElement($form->get('course-id')); ?>
+
+    </div>
+
+    <div class="col-sm-12">
+        <div class="form-group">
+            <?= $this->formElement($form->get('submit')); ?>
+        </div>
+    </div>
+        
+<?= $this->form()->closeTag(); ?>
+<div class="clearfix"></div>
+<script>
+
+$('form').submit(function(e){
+    e.preventDefault();
+    $('.student-updated-success').hide();
+    var data = {
+        'username' : $('#username').val(),
+        'password' : $('#password').val(),
+        'account-name' : $('#account-name').val(),
+        'first-name' : $('#first-name').val(),
+        'last-name' : $('#last-name').val(),
+        'language' : $('#language').val(),
+        'email' : $('#email').val(),
+        'added-date' : $('#added-date').val(),
+        'start-date' : $('#start-date').val(),
+        'end-date' : $('#end-date').val(),
+        'version' : $('#version').val(),
+        'training-done' : $('#training-done').val(),
+        'expiration-date' : $('#expiration-date').val(),
+        'question-group' : $('#question-group').val(),
+        'jurisdiction' : $('#jurisdiction').val(),
+        'gender' : $('#gender').val(),
+        'store-number' : $('#store-number').val(),
+    }
+
+    $.ajax({
+        type: 'post',
+        url: '/student-manager/edit-student/updateStudent',
+        data: data,
+        dataType: 'json',
+        success: function(response)
+        {
+            $('.student-updated-success').show();
+        }
+    });
+
+    console.log(data);
+})
+
+</script>
+<style>
+.form-group {
+    width:300px;
+}
+button {
+    color:black;
+}
+#versionchart {
+    color:black;
+}
+.modal-content {
+    border-radius:0px;
+}
+.version-row:hover {
+    background-color:blue;
+    color:white;
+    cursor:pointer;
+}
+</style>

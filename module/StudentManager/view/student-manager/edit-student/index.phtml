@@ -1,0 +1,263 @@
+<style>
+    #lookup {
+        height:100%;
+        padding-top:10px;
+        padding-bottom:10px;
+    }
+    tr td{
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+    }
+    tbody {
+        display:inline-block;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        max-height:380px;
+    }
+    thead, tbody tr {
+        display:table;
+        width:100%;
+        table-layout:fixed;/* even columns width , fix width of table too*/
+    }
+    table {
+        width:400px;
+    }
+    #students {
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+    }
+    #student{
+        border-left:2px solid #ddd;
+        height:100%;
+        padding-top:10px;
+        padding-bottom:10px;
+    }
+    .modal-content {
+        border-radius: 0px;
+    }
+    .modal-header, .modal-body, .modal-footer{
+        background:#333;
+    }
+    .modal select {
+        background: #999;
+        color:white;
+    }
+    .modal select option:hover{
+        background: #265a88;
+        color:white;
+    }
+</style>
+<div class="page-header">
+    <h1>Student Manager<small> - Select Student</small></h1>
+</div>
+<div class='col-sm-12' id="lookup">
+    <input type="text" id="filter" class="form-control" placeholder="Search for students..">
+    <br /><br />
+    <p>
+        <button id="change-course" class="btn btn-default">Change Course</button>
+        <h4 id="course-id-label"></h4>
+    </p>
+    <div class="table-wrapper">
+        <table id="students" class="table table-stripped table-condensed">
+            <thead>
+                <tr>
+                    <th width="25px"></th>
+                    <th>Username</th>                
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Account Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <p class="table-msg">Begin typing to search through students.</p>
+    <form action="edit-student/edit" method="post">
+        <input type="hidden" id="student-id" name="student-id">
+        <input type="hidden" id="course-id" name="course-id">
+        <div class="form-group">
+            <button class="btn btn-primary" id="submit">Submit</button>
+        </div>
+    </form>
+</div>
+<div id="course-list-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Select a Course</h4>
+            </div>
+            <div class="modal-body">
+                <select name="productid" size="11" class="form-control" id="course-list">
+                    <option value="default">Select a course...</option>
+                    <option value="178">Alcohol Training</option>
+                    <option value="166">Allergen Awareness</option>
+                    <option value="167">Allergen Plan Development</option>
+                    <option value="168">Allergen Plan Specialist</option>
+                    <option value="183">Anchorage, AK Food Handler</option>
+                    <option value="163">Arizona Food Handler Training</option>
+                    <option value="77">Barbour County, WV Food Handler</option>
+                    <option value="83">Cabell-Huntington County, WV Food Handler</option>
+                    <option value="16">California Food Handler Training</option>
+                    <option value="4">Cooking Basics</option>
+                    <option value="1">Earn More With Service</option>
+                    <option value="75">Florida Food Worker Training Program</option>
+                    <option value="3">Food Handler Training (all other states)</option>
+                    <option value="2">Food Safety Manager Certification Training</option>
+                    <option value="14">Food Safety Re-Certification Training</option>
+                    <option value="165">Food Safety Refresher Training</option>
+                    <option value="6">HACCP Managers Certificate Course</option>
+                    <option value="19">Idaho Food Handler Training</option>
+                    <option value="162">Illinois Food Handler Training</option>
+                    <option value="164">Jackson County MO Food Handler Training</option>
+                    <option value="157">Mid-Ohio Valley Health Department West Virginia Food Worker's Permit</option>
+                    <option value="181">Minnesota Food Safety Renewal Training</option>
+                    <option value="185">Municipality of Anchorange Food Handler</option>
+                    <option value="18">New Mexico Food Handler Training</option>
+                    <option value="74">Norfolk VA Food Handler Training</option>
+                    <option value="179">Ohio Level 2 Foodservice Food Safety Manager Certification Training</option>
+                    <option value="182">Ohio Level 2 Retail Food Safety Manager Certification Training</option>
+                    <option value="24">Ohio Level One Certification</option>
+                    <option value="114">Pendleton County, WV Food Handler</option>
+                    <option value="115">Pocahontas County, WV Food Handler</option>
+                    <option value="119">Randolph County, WV Food Handler</option>
+                    <option value="169">Retail Food Safety Manager Certification Training</option>
+                    <option value="180">Rhode Island Food Safety Re-Certification Training</option>
+                    <option value="5">Strategies for Increasing Sales</option>
+                    <option value="21">Texas Food Handler Training</option>
+                    <option value="79">Tulsa Food Handler</option>
+                    <option value="123">Upshur County, WV Food Handler</option>
+                    <option value="80">Utah Food Handler Training</option>
+                    <option value="124">Wayne County, WV Food Handler</option>
+                    <option value="113">Wheeling-Ohio County, WV Food Handler</option>
+                    <option value="76">Wichita Food Handler</option>
+                    <option value="171">Wisconsin Re-Certification Training</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button id="course-list-submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+$(document).ready(function(){
+    // When the page loads, force the user to select a course first.
+    $('#course-list-modal').modal('show');
+});
+
+// Don't let the user hide the modal without selecting a course
+$('#course-list-modal').on('hidden.bs.modal', function (e) {
+    // If the course id hidden form field has not been set,
+    if($("#course-id").val().length == 0)
+    {        
+        // keep showing the modal until one is selected.
+        $('#course-list-modal').modal('show');
+    }
+});
+
+$("#course-list-submit").click(function (e) {
+    // Set the course id variable from the value of the option selected in the course list.
+    var courseId = $("#course-list :selected").attr('value');
+    // Force user to choose a course.
+    if(courseId.length == 0)
+    {
+        // If no course was selected, do not hide the modal.
+        e.preventDefault();
+        // Display an alert.
+        alert('Please select a course before continuing.');
+    }
+    else
+    {
+        // Empty the table.
+        $('#students tbody').empty();
+        // Set the course id in the hidden form field.
+        $("#course-id").val(courseId);
+        // Set the course title above the table.
+        $("#course-id-label").html($("#course-list :selected").html());
+        // Hide the modal.
+        $('#course-list-modal').modal('hide');
+    }
+});
+
+// Prevent the user from moving forward until they have selected a student and course
+$('#change-course').click(function(e){
+    if($("#course-id").val().length == 0 || $("#student-id").val().length == 0)
+    {
+        // Stop the form from submitting to the next page.
+        e.preventDefault();
+        // If the course has not been selected, warn the user.
+        if($("#course-id").val().length == 0)
+            alert("Please select a course before continuing.");
+        // If the student has not been selected, warn the user.
+        else if($("#student-id").val().length == 0)
+            alert("Please select a student before continuing.");
+        else
+        // If the course or student has not been selected, warn the user.
+            alert("Please select a course and student before continuing.");
+    }
+});
+
+// Fill the table with students as the user types.
+$('#filter').keyup(function(e){
+    // Get the string of characters currently in the input box.
+    var data = $(this).val();    
+    // Once the user has enetered more than 3 characters we begin the search.
+    if(data.length > 3)
+    {
+        // Get the course id in the hidden form field.
+        var courseId = $("#course-id").val();
+        // Request a list via ajax call to controller.
+        $.ajax({
+            type: 'post',
+            url: '/student-manager/edit-student/list',
+            data: {'filter': data, 'course':courseId},
+            dataType: 'json',
+            success: function(response)
+            {
+                // Call a function to iterate over the response and load the table.
+                loadStudentTable(response);
+            }
+        });
+    }
+});
+
+// Iterate over the response and load the student table.
+function loadStudentTable(data)
+{
+    // Empty the table in case the course has changed from last search.
+    $('#students tbody').html('');
+    // Let the user know if there were no matches.
+    if(data.length == 0)
+        $('.table-msg').html('No students found matching your criteria.');
+    else
+    // Remove the warning if there are matches.
+        $('.table-msg').html('');
+        
+    $(data).each(function(){
+        // Create a new row
+        var $row = $('<tr></tr>');
+        // Fill it with the appropriate data.
+        $row.append('<td class="user-id"   width="25px"><input type="radio" name="student" value="'+this.UserId+'" class="student-option"/></td>');
+        $row.append('<td class="user-name">'+this.Username+'</td>');        
+        $row.append('<td class="first-name">'+this.FirstName+'</td>');
+        $row.append('<td class="last-name">'+this.LastName+'</td>');
+        $row.append('<td class="account-name">'+this.AccountName+'</td>');
+        $row.append('<td class="email">'+this.Email+'</td>');
+        // Append the row to the body of the table.
+        $('#students tbody').append($row);
+    });
+
+    // Register the on click event of the options for the student list.
+    // This has to be done after all the rows have been loaded.
+    $('.student-option').click(function(){
+        // Set the student id in the hidden form field.
+        $("#student-id").val($(this).val());
+    });
+}
+</script>
